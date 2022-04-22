@@ -38,7 +38,7 @@ def jogar_forca():
         if "_" not in letras_corretas:
             print(letras_corretas)
             print("Parabéns, você acertou a palavra!")
-            break
+            return
     print("Você perdeu, infelizmente você foi enformado! A palavra secreta era {}.".format(
         palavra_secreta.upper()))
 

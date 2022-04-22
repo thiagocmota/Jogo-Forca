@@ -21,9 +21,9 @@ def jogar_forca():
 
     print(letras_corretas)
 
-    while True:
-        chute = input("Digite uma letra: ").strip().lower()
-        chute = (verfyIsAlpha(chute))
+    while erros < 6:
+        chute = createAChute()
+
         if chute in palavra_secreta:
             index = 0
             for letra in palavra_secreta:
@@ -35,20 +35,24 @@ def jogar_forca():
             erros += 1
             print("Faltam {} tentativas até você se enforcar".format(6 - erros))
 
-        if erros == 6:
-            print("Você perdeu, infelizmente você foi enformado! A palavra secreta era {}.".format(
-                palavra_secreta.upper()))
-            break
         if "_" not in letras_corretas:
             print(letras_corretas)
             print("Parabéns, você acertou a palavra!")
             break
+    print("Você perdeu, infelizmente você foi enformado! A palavra secreta era {}.".format(
+        palavra_secreta.upper()))
 
 
-def verfyIsAlpha(letra):
-    while not letra.isalpha():
-        letra = input("Digite apenas lertas: ")
-        return letra
+def validateChute(letra):
+    while not letra.isalpha() or len(letra) > 1:
+        letra = input("Digite apenas uma letra: ")
+    return letra
+
+
+def createAChute():
+    chute = input("Digite uma letra: ").strip().lower()
+    chute = validateChute(chute)
+    return chute
 
 
 if __name__ == "__main__":

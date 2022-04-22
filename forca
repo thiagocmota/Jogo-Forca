@@ -1,0 +1,55 @@
+import random
+
+
+def jogar_forca():
+    print("*********************************")
+    print("Bem vindo ao jogo de Forca!")
+    print("*********************************")
+
+    with open("palavras.txt") as arquivo:
+        palavras = []
+        for linha in arquivo:
+            linha = linha.strip()
+            palavras.append(linha)
+
+    numero = random.randrange(0, len(palavras))
+
+    palavra_secreta = palavras[numero].lower()
+    letras_corretas = ["_" for letra in palavra_secreta]
+
+    erros = 0
+
+    print(letras_corretas)
+
+    while True:
+        chute = input("Digite uma letra: ").strip().lower()
+        chute = (verfyIsAlpha(chute))
+        if chute in palavra_secreta:
+            index = 0
+            for letra in palavra_secreta:
+                if chute == letra:
+                    letras_corretas[index] = letra
+                index += 1
+            print(letras_corretas)
+        else:
+            erros += 1
+            print("Faltam {} tentativas até você se enforcar".format(6 - erros))
+
+        if erros == 6:
+            print("Você perdeu, infelizmente você foi enformado! A palavra secreta era {}.".format(
+                palavra_secreta.upper()))
+            break
+        if "_" not in letras_corretas:
+            print(letras_corretas)
+            print("Parabéns, você acertou a palavra!")
+            break
+
+
+def verfyIsAlpha(letra):
+    while not letra.isalpha():
+        letra = input("Digite apenas lertas: ")
+        return letra
+
+
+if __name__ == "__main__":
+    jogar_forca()
